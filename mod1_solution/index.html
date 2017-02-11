@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="LunchCheck">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <script src="angular.min.js"></script>
+    <script src="app.js"></script>
+    <title>Coursera Angular Assignment - Module 1: Lunch Checker</title>
+  </head>
+  <body>
+    <div ng-controller="LunchCheckController" class="container">
+      <h1>Module 1: Lunch Checker</h1>
+        <div class="form-group">
+          <input ng-model="lunches" ng-keyup="displayNumberOfLunches();" id="lunch-menu" type="text" placeholder="List comma separated dishes you have for lunch" class="form-control">
+          <!-- Number of lunches: {{numberOfLunches}} <br>
+          The lunches array: {{lunchesArr}} -->
+          <h4>Empty elements will <strong>not</strong> count!</h4>
+        </div>
+        <div class="form-group message">
+          <button ng-click="sayState()" >Check If Too Much</button>
+          <div class="btn btn-{{btnClass}}">{{state}}</div>
+        </div>
+    </div>
+
+  </body>
+
+</html>
