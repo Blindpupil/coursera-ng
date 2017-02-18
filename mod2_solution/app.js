@@ -22,7 +22,9 @@ function ToBuyController(ShoppingListCheckOffService) {
 
   showList.removeItem = function (itemIndex) {
     ShoppingListCheckOffService.removeItem(itemIndex);
+    showList.isItDone = ShoppingListCheckOffService.getDone(); //note that in order for the errorDone value to be thrown correctly, it needs to be called INSIDE the .removeItem function
   };
+
 }
 
 AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
@@ -30,8 +32,14 @@ function AlreadyBoughtController(ShoppingListCheckOffService) {
   var boughtItems = this;
 
   boughtItems.boughtItemsList = ShoppingListCheckOffService.getBoughtItems();
+
+  boughtItems.removeItem = function () {
+    boughtItems.nothingBought = ShoppingListCheckOffService.getBought();
+  };
 }
 
+
+//Business logic start
 
 function ShoppingListCheckOffService() {
   var service = this;
@@ -42,22 +50,33 @@ function ShoppingListCheckOffService() {
   //List of bought items
   var boughtItemsList = [];
 
+  var errorDone = "";
+  var nothingBought = "";
+
   service.removeItem = function (itemIndex) {
     var removedItem = items.splice(itemIndex, 1);
-    // console.log('removedItem', removedItem);
     boughtItemsList.push(removedItem.pop());
-    // console.log('boughtItems', boughtItemsList);
+
+    if (items.length === 0){ errorDone = true; } else { errorDone = false; }
+    if (boughtItemsList.length >= 1) { nothingBought = false; console.log(boughtItemsList.length); } else { nothingBought = true; console.log(boughtItemsList.length)}
+  };
+
+  service.getDone = function () {
+    return errorDone;
   };
 
   service.getItems = function () {
-
     return items;
+  };
+
+  service.getBought = function () {
+    return nothingBought;
+    console.log(nothingBought);
   };
 
   service.getBoughtItems = function () {
     return boughtItemsList;
   };
-
 }
 
 })();

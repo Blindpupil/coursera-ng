@@ -43,7 +43,7 @@
          </li>
        </ul>
 
-       <div class="emptyMessage">Everything is bought!</div>
+       <div ng-if="showList.isItDone" class="emptyMessage">Everything is bought!</div>
       </div>
 
       <!-- Already Bought List -->
@@ -52,7 +52,7 @@
        <ul>
          <li ng-repeat="item in boughtItems.boughtItemsList">Bought {{item.item_quantity}} {{item.item_name}}</li>
        </ul>
-       <div class="emptyMessage">Nothing bought yet.</div>
+       <div ng-click="boughtItems.removeItem();" ng-hide="boughtItems.nothingBought" class="emptyMessage">Nothing bought yet.</div> <!-- hide when nothingBought is 1 or more -->
       </div>
 
     </div>
