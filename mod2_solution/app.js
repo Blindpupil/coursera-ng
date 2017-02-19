@@ -33,11 +33,7 @@ function AlreadyBoughtController(ShoppingListCheckOffService) {
 
   boughtItems.boughtItemsList = ShoppingListCheckOffService.getBoughtItems();
 
-  boughtItems.removeItem = function () {
-    boughtItems.nothingBought = ShoppingListCheckOffService.getBought();
-  };
 }
-
 
 //Business logic start
 
@@ -58,7 +54,6 @@ function ShoppingListCheckOffService() {
     boughtItemsList.push(removedItem.pop());
 
     if (items.length === 0){ errorDone = true; } else { errorDone = false; }
-    if (boughtItemsList.length >= 1) { nothingBought = false; console.log(boughtItemsList.length); } else { nothingBought = true; console.log(boughtItemsList.length)}
   };
 
   service.getDone = function () {
